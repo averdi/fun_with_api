@@ -1,9 +1,8 @@
 require 'httparty'
 require 'pry'
 require 'factual'
-factual = Factual.new("qd8habB4vnjoRKFNn6UAaVh12xpdkskpV6AEy5wX", "WPYZFyL5yxICexWW3AtApl3zZpp1i5rs4AAHLKqX")
-
-#factual.table("places-us").schema
+factual = Factual.new("bUMyTdtg1t1dEPgp4fsDtDlr2Em5w73ejSDOym3w", "fsANcB1KVoGnXNXv2NeJrqDw80QuRotGRZt4OJ8E")
+# factual.table("places-us").schema
 
 
 
@@ -20,7 +19,7 @@ factual = Factual.new("qd8habB4vnjoRKFNn6UAaVh12xpdkskpV6AEy5wX", "WPYZFyL5yxICe
        def find_restaurant(city, state)
       @city = city
       @state = state
-      response = HTTParty.get("http://api.v3.factual.com/t/restaurants-us?q=#{@city}, #{@state}&sort=placerank:desc&limit=10&KEY=qd8habB4vnjoRKFNn6UAaVh12xpdkskpV6AEy5wX")
+      response = HTTParty.get("http://api.v3.factual.com/t/restaurants-us?q=#{@city}, #{@state}&sort=placerank:desc&limit=10&KEY=bUMyTdtg1t1dEPgp4fsDtDlr2Em5w73ejSDOym3w")
       restaurants_array = response["response"]["data"]
 
       i = 1
