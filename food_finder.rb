@@ -21,7 +21,15 @@ factual = Factual.new("qd8habB4vnjoRKFNn6UAaVh12xpdkskpV6AEy5wX", "WPYZFyL5yxICe
       @city = city
       @state = state
       response = HTTParty.get("http://api.v3.factual.com/t/restaurants-us?q=#{@city}, #{@state}&KEY=qd8habB4vnjoRKFNn6UAaVh12xpdkskpV6AEy5wX")
-      binding.pry
+      restaurants_array = response["response"]["data"]
+
+      restaurants_array.map do |rest_hash|
+        name = rest_hash["name"]
+        address = rest_hash["address"]
+        puts "Try #{name} located at #{address}"
+      end
+
+
       end
 
 
