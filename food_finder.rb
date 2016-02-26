@@ -5,9 +5,6 @@ require 'factual'
 # factual.table("places-us").schema
 
 
-
-
-
     puts "Welcome! Are you hungry? Yes or no?"
       hungry = gets.strip.downcase
     if hungry == "yes"
@@ -19,8 +16,6 @@ require 'factual'
        def find_restaurant(city, state)
       @city = city
       @state = state
-      # response = HTTParty.get("http://api.v3.factual.com/t/restaurants-us?q=#{@city}, #{@state}&sort=placerank:desc&limit=10&KEY=bUMyTdtg1t1dEPgp4fsDtDlr2Em5w73ejSDOym3w")
-      # restaurants_array = response["response"]["data"]
 
       restaurants_array = @factual.table("restaurants-us").filters("$and" => [{"locality" => {"$eq" =>@city}}, {"region" => {"$eq" => @state}}]).rows[0..9]
 
@@ -29,10 +24,12 @@ require 'factual'
         name = rest_hash["name"]
         address = rest_hash["address"]
         # cuisine = rest_hash["cuisine"]
-        puts "#{i} #{name}, located at #{address}"
+        puts "#{i}. #{name}, located at #{address}"
         puts "-" * 65
         i += 1
-        i <=102
+        if i >10
+            return " "
+        end
       end
 
 
@@ -41,8 +38,8 @@ require 'factual'
 
       puts find_restaurant(@city, @state)
 
-#goals for after lunch:
-#display rest name, address, cuisine, alc yes/no
+#goals
+#get cuisine selection to be an option
 #make the restaurants display numerically
 #BONUS: loop to ask for different ones
 
