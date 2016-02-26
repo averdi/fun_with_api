@@ -10,7 +10,7 @@ require 'factual'
     if hungry == "yes"
          puts "What city are you in?"
       @city = gets.strip.capitalize
-        puts "What state are you in?"
+        puts "What state are you in (by abbreviation)?"
       @state = gets.strip.upcase
 
        def find_restaurant(city, state)
@@ -19,11 +19,11 @@ require 'factual'
 
       restaurants_array = @factual.table("restaurants-us").filters("$and" => [{"locality" => {"$eq" =>@city}}, {"region" => {"$eq" => @state}}]).rows[0..9]
 
+      puts "The top ten restaurants in #{@city} are...\n\n"
       i = 1
       restaurants_array.map do |rest_hash|
         name = rest_hash["name"]
         address = rest_hash["address"]
-        # cuisine = rest_hash["cuisine"]
         puts "#{i}. #{name}, located at #{address}"
         puts "-" * 65
         i += 1
@@ -40,7 +40,6 @@ require 'factual'
 
 #goals
 #get cuisine selection to be an option
-#make the restaurants display numerically
 #BONUS: loop to ask for different ones
 
 
