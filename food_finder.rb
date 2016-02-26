@@ -22,7 +22,7 @@ require 'factual'
       # response = HTTParty.get("http://api.v3.factual.com/t/restaurants-us?q=#{@city}, #{@state}&sort=placerank:desc&limit=10&KEY=bUMyTdtg1t1dEPgp4fsDtDlr2Em5w73ejSDOym3w")
       # restaurants_array = response["response"]["data"]
 
-      restaurants_array = @factual.table("restaurants-us").rows
+      restaurants_array = @factual.table("restaurants-us").filters("$and" => [{"locality" => {"$eq" =>@city}}, {"region" => {"$eq" => @state}}]).rows[0..9]
 
       i = 1
       restaurants_array.map do |rest_hash|
