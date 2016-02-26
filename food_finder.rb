@@ -12,12 +12,15 @@ require 'factual'
       @city = gets.strip.capitalize
         puts "What state are you in (by abbreviation)?"
       @state = gets.strip.upcase
+        puts "What sort of food are you in the mood for?"
+      @cuisine = gets.strip
+
 
        def find_restaurant(city, state)
       @city = city
       @state = state
 
-      restaurants_array = @factual.table("restaurants-us").filters("$and" => [{"locality" => {"$eq" =>@city}}, {"region" => {"$eq" => @state}}]).rows[0..9]
+      restaurants_array = @factual.table("restaurants-us").filters("$and" => [{"locality" => {"$eq" =>@city}}, {"region" => {"$eq" => @state}}, {"cuisine" => {"$eq" =>@cuisine}}]).rows[0..9]
 
       puts "The top ten restaurants in #{@city} are...\n\n"
       i = 1
